@@ -27,7 +27,6 @@ max_y = valid_data.map do |datum|
   datum[1]
 end.flatten.max
 
-p max_x, max_y
 map = Matrix.build(max_x+1, max_y+1) { 0 }
 
 valid_data.each do |datum|
