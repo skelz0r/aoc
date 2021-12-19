@@ -1,0 +1,54 @@
+<head>
+  <script src='https://cdn.plot.ly/plotly-2.6.3.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
+</head>
+
+<script>
+  d3.csv('./data.csv', function(err, rows){
+    function unpack(rows, key) {
+      return rows.map(function(row) {
+        return row[key];
+      });
+    }
+
+    var data = [];
+
+      for ( var i = 0 ; i < 4 ; i++) {
+        console.log('in');
+      var color = i*10;
+
+      var trace = {
+        x:unpack(rows, 'x'+i),
+        y: unpack(rows, 'y'+i),
+        z: unpack(rows, 'z'+i),
+        mode: 'markers',
+        marker: {
+            size: 12,
+            line: {
+                color: 'rgba('+i+', '+i+', '+i+', 0.14)',
+                width: 0.5
+              },
+            opacity: 0.8
+          },
+        type: 'scatter3d'
+      };
+
+        console.log(trace);
+      data.push(trace);
+    }
+      console.log(data);
+    var layout = {margin: {
+        l: 0,
+        r: 0,
+        b: 0,
+        t: 0
+      }};
+
+      Plotly.newPlot('myDiv', data, layout);
+    });
+</script>
+
+<body>
+  <div id='myDiv'>
+  </div>
+</body>
