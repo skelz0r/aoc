@@ -1,0 +1,63 @@
+## POUR X
+
+1. reset x
+2. add z a x
+3. mod x 26
+2. add x
+11
+14
+15
+13
+-12
+10
+-15
+13
+10
+-13
+-13
+-14
+-2
+-9
+
+> eql x w
+> eql x 0
+
+reset à 1 ou 0 =>
+SI x != w => 1
+SI x == w => 0
+
+---------
+
+Y
+
+reset 0
+add 25
+mul y par x (1 ou 0)
+add 1
+
+y => 1 OU 26
+
+==> z * 26 OU 1
+
+reset 0
+ajoute w à y
+
+add y
+14
+6
+6
+13
+8
+8
+7
+10
+8
+12
+10
+8
+8
+7
+
+mul x à y
+
+==> add y à z
