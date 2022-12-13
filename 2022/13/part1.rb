@@ -51,12 +51,6 @@ def compare(p1, p2, i, d=0)
     if issue == :undefined
       dprint("#{tab}  Undefined here, check next\n")
 
-      if p1[1].nil?
-        return true
-      elsif p2[1].nil?
-        return false
-      end
-
       compare(Array(p1[1]), Array(p2[1]), i, d+1)
     else
       issue
