@@ -11,10 +11,10 @@ file = 'input'
   pairs.split("\n").map do |pair|
     eval(pair)
   end
-end
+end.flatten(1).concat([[[2]]]).concat([[[6]]])
 
 def dprint(string)
-  print string
+  # print string
 end
 
 def compare(p1, p2, i, d=0)
@@ -66,22 +66,13 @@ end
 
 sum = 0
 
-@pairs.each_with_index do |pairs, i|
-  p1, p2 = pairs
-
-  dprint("# Pair #{i+1}\n")
-  result = compare(p1, p2, i)
-
-  if result == :undefined
-    raise "Undefined"
-  elsif result
-    dprint(" Right order: #{i+1}")
-    sum += i+1
+@pairs.sort! do |p1, p2|
+  case compare(p1, p2, sum)
+  when true
+    -1
   else
-    dprint(" Not right order")
+    1
   end
-
-  dprint("\n")
 end
 
-print sum
+p (@pairs.index([[2]])+1) * (@pairs.index([[6]])+1)
