@@ -35,11 +35,13 @@ def compare(p1, p2, i, d=0)
     dprint "#{tab}  No more item in right: not right order\n"
     return false
   end
+
   if p1[0].is_a?(Integer) && p2[0].is_a?(Integer)
     dprint("#{tab}   Compare int #{p1[0]} and #{p2[0]}\n")
+
     case p1[0] <=> p2[0]
     when 0
-      compare(p1[1..-1], p2[1..-1], i, d+1)
+      return compare(p1[1..-1], p2[1..-1], i, d+1)
     when 1
       return false
     else
@@ -51,14 +53,20 @@ def compare(p1, p2, i, d=0)
     if issue == :undefined
       dprint("#{tab}  Undefined here, check next\n")
 
-      compare(Array(p1[1]), Array(p2[1]), i, d+1)
+      if p1[1..-1].empty?
+        return true
+      elsif p2[1..-1].empty?
+        return false
+      end
+
+      return compare(p1[1..-1], p2[1..-1], i, d+1)
     else
-      issue
+      return issue
     end
   elsif p1[0].is_a?(Array) && p2[0].is_a?(Integer)
-    compare(p1[0], [p2[0]], i, d+1)
+    return compare(p1[0], [p2[0]], i, d+1)
   else
-    compare([p1[0]], p2[0], i, d+1)
+    return compare([p1[0]], p2[0], i, d+1)
   end
 end
 
@@ -74,7 +82,7 @@ sum = 0
     raise "Undefined"
   elsif result
     dprint(" Right order: #{i+1}")
-    sum = (i+1) + sum
+    sum += i+1
   else
     dprint(" Not right order")
   end
